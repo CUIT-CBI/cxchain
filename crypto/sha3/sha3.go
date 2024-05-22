@@ -8,5 +8,7 @@ import (
 
 func Sha3(value []byte) hash.Hash {
 	sha := sha3.NewLegacyKeccak256()
-	return hash.BytesToHash(sha.Sum(value))
+	sha.Write(value)
+	return hash.BytesToHash(sha.Sum(nil))
 }
+
