@@ -7,9 +7,14 @@ import (
 )
 
 func main() {
-	db := kvstore.NewLevelDB("./leveldb")
+	db := kvstore.NewLevelDB("./testdb")
 	state := trie.NewState(db, trie.EmptyHash)
-	state.Store([]byte("hello"), []byte("world"))
-	value, err := state.Load([]byte("hello"))
+	state.Store([]byte("apple"), []byte("apple"))
+	state.Store([]byte("apply"), []byte("apply"))
+	state.Store([]byte("application"), []byte("application"))
+	state.Store([]byte("banana"), []byte("banana"))
+	state.Store([]byte("band"), []byte("band"))
+	value, err := state.Load([]byte("apple"))
 	fmt.Println(string(value), err)
+
 }
