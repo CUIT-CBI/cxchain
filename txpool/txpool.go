@@ -1,13 +1,20 @@
 package txpool
 
 import (
-	"cxchain223/types"
-	"cxchain223/utils/hash"
+	"chain/common"
+	"chain/transaction"
+	"chain/statedb"
 )
 
-type TxPool interface {
-	SetStatRoot(root hash.Hash)
-	NewTx(tx *types.Transaction)
-	Pop() *types.Transaction
-	NotifyTxEvent(txs []*types.Transaction)
+type Pool interface {
+	// addTransaction is a function field for adding a transaction
+	AddTransaction (tx *transaction.Transaction) 
+	// PopTransaction is a function field for popping a transaction
+	PopTransaction ()transaction.Transaction
+	// SetStateRoot is a function field for setting the state root
+	SetStateRoot(root common.Hash) 
+	// NotifyTrascation is a function field for notifying transactions
+	NotifyTrascation(txs []*transaction.Transaction)
+	//create a new transaction pool
+	NewTxPool(statedb statedb.StateDB) *Pool
 }

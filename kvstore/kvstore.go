@@ -3,13 +3,17 @@ package kvstore
 import "io"
 
 type KVStore interface {
-	Put(key, value []byte) error
+	//Get retrieves the value associated with the given key.
 	Get(key []byte) ([]byte, error)
-	Exist(key []byte) (bool, error)
-	Delete(key []byte) error
-}
 
-type KVDatabase interface {
-	KVStore
+	//Put stores the value associated with the given key.
+	Put(key, value []byte) error
+
+	//Delete removes the key-value pair associated with the given key.
+	Delete(key []byte) error
+
+	//Has checks if the key exists in the store.
+	Has(key []byte) (bool, error)
+
 	io.Closer
 }
